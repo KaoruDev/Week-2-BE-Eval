@@ -81,11 +81,12 @@ describe Tennis::Player do
     context 'when players are tied and have more than 3 points' do
       it 'returns deuce' do
         player.points = 3
-        player.opponent = 3
+        player.opponent.points = 3
 
         expect(player.score).to eq("deuce")
       end
     end
+
   end
 end # end of Tennis:Player testing.
 
