@@ -10,7 +10,7 @@ module Tennis
       @player2.opponent = @player1
     end
 
-    # Increase a player score. Parameter expected is a player class.
+    # Increase a player score. Expecting an integer.
     #
     # Returns nothing.
     def wins_ball(player_num)
