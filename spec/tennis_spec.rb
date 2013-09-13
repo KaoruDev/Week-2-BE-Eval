@@ -105,6 +105,15 @@ describe Tennis::Player do
         expect(player.score).to eq("win")
       end
     end
+
+    context 'record sets won of player' do
+      it 'returns sets won' do
+        player.points = 5
+        player.score
+
+        expect(player.sets_won).to eq(1)
+      end
+    end
   end
 end # end of Tennis:Player testing.
 
