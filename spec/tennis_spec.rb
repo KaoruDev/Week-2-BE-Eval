@@ -163,6 +163,17 @@ describe Tennis::Player do
         expect(player.points).to eq(0)
       end
     end
+
+    context 'player wins match when she wins her third set' do
+      it 'returns a match win' do
+        player.sets_won = 2
+        player.games_won = 4
+        4.times { player.record_won_ball! }
+
+        expect(player.match_won).to eq(1)
+      end
+    end
+
   end
 end # end of Tennis:Player testing.
 
