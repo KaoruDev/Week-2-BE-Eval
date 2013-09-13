@@ -35,13 +35,57 @@ module Tennis
 
     # Returns the String score for the player.
     def score
-      return 'love' if @points == 0
-      return "fifteen" if @points == 1
-      return "thirty" if @points == 2
-      return "forty" if @points == 3 && @points != @opponent.points
-      return "deuce" if @points >= 3 && @points == @opponent.points
-      return "advantage" if @points == @opponent.points + 1
-      return "win" if @points > @opponent.points + 1 && @points > 3
+      return 'love' if love?
+      return "fifteen" if fifteen?
+      return "thirty" if thirty?
+      return "forty" if forty?
+      return "deuce" if deuce?
+      return "advantage" if advantage?
+      return "win" if win?
+    end
+
+    private
+
+    # Returns true if player's score is 0
+    #
+    def love?
+      @points == 0
+    end
+
+    # Returns true if player's score is 1
+    #
+    def fifteen?
+      @points == 1
+    end
+
+    # Returns true if player's score is 2
+    #
+    def thirty?
+      @points == 2
+    end
+
+    # Returns true if player's score is 3 and not equal to player's points
+    #
+    def forty?
+      @points == 3 && @points != @opponent.points
+    end
+
+    # Returns true if player's point == opponent's score and is > 3
+    #
+    def deuce?
+      @points >= 3 && @points == @opponent.points
+    end
+
+    # Returns true is player points > 3 and is 1 more than oppponent's point
+    #
+    def advantage?
+      @points == @opponent.points + 1
+    end
+
+    # Returns true if player points > 3 and 2 more than opponent's points.
+    #
+    def win?
+       @points > @opponent.points + 1 && @points > 3
     end
   end
 end
