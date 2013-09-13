@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'bundler/setup'
 require 'rspec'
+require 'pry'
 require_relative '../tennis'
 
 describe Tennis::Game do
@@ -91,6 +92,7 @@ describe Tennis::Player do
       it 'returns advantage' do
         player.points = 4
         player.opponent.points = 3
+
 
         expect(player.score).to eq("advantage")
       end
