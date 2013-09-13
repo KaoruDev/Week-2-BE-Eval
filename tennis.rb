@@ -9,6 +9,13 @@ module Tennis
       @player1.opponent = @player2
       @player2.opponent = @player1
     end
+
+    # Increase a player score. Parameter expected is a player class.
+    #
+    # Returns nothing.
+    def wins_ball(player)
+      player.record_won_ball!
+    end
   end
 
   class Player
@@ -28,6 +35,9 @@ module Tennis
     # Returns the String score for the player.
     def score
       return 'love' if @points == 0
+      return "fifteen" if @points == 1
+      return "thirty" if @points == 2
+      return "forty" if @points == 3
     end
   end
 end
