@@ -170,7 +170,7 @@ describe Tennis::Player do
         player.games_won = 4
         4.times { player.record_won_ball! }
 
-        expect(player.match_won).to eq(1)
+        expect(player.matches_won).to eq(1)
       end
     end
 

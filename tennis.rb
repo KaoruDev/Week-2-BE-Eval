@@ -20,12 +20,13 @@ module Tennis
   end
 
   class Player
-    attr_accessor :points, :opponent, :games_won, :sets_won
+    attr_accessor :points, :opponent, :games_won, :sets_won, :matches_won
 
     def initialize
       @points = 0
       @games_won = 0
       @sets_won = 0
+      @matches_won = 0
     end
 
     # Increments the score by 1.
@@ -91,7 +92,7 @@ module Tennis
     def win?
       if won_game?
         @games_won += 1
-        won_set?
+        won_set
         return true
       end
     end
@@ -108,7 +109,7 @@ module Tennis
 
     # Returns true if player has won a set
     #
-    def won_set?
+    def won_set
       if @opponent.games_won == 6 && @games_won == 7
         @games_won = 0
         @sets_won += 1
@@ -116,6 +117,14 @@ module Tennis
         @games_won = 0
         @sets_won += 1
       end
+
+      @matches_won += 1 if won_match?
+    end
+
+    # Returns true if player wins 3 games
+    #
+    def won_match?
+      @sets_won == 3
     end
   end
 end
