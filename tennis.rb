@@ -93,8 +93,24 @@ module Tennis
         @games_won += 1
         @points = 0
         @opponent.points = 0
+        won_game?
         return true
       end
+    end
+
+    # Returns true if a player has won a game
+    #
+    def won_game?
+      if won_set?
+        @sets_won += 1
+        @games_won = 0
+      end
+    end
+
+    # Returns true if player has won a set
+    #
+    def won_set?
+      @games_won > 4 && @games_won > @opponent.games_won + 1
     end
   end
 end

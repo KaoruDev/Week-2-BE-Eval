@@ -107,17 +107,17 @@ describe Tennis::Player do
       end
     end
 
-    context 'record sets won of player' do
-      it 'returns sets won' do
+    context 'record games won of player' do
+      it 'returns games won' do
         player.points = 5
         player.score
 
-        expect(player.sets_won).to eq(1)
+        expect(player.games_won).to eq(1)
       end
     end
 
-    context 'resets game set if player wins' do
-      it 'returns sets won' do
+    context 'resets points if player wins a game' do
+      it 'returns games won' do
         player.opponent.opponent = player
         3.times { player.record_won_ball!}
         4.times { player.opponent.record_won_ball! }
@@ -126,7 +126,7 @@ describe Tennis::Player do
         expect(player.games_won).to eq(1)
       end
 
-      it 'returns player score for new set' do
+      it 'returns player score for new game' do
         3.times { player.record_won_ball!}
         4.times { player.opponent.record_won_ball! }
         5.times { player.record_won_ball!}
@@ -139,6 +139,16 @@ describe Tennis::Player do
       it 'returns set won by player' do
         player.games_won = 4
         player.opponent.games_won = 3
+        4.times { player.record_won_ball! }
+
+        expect(player.sets_won).to eq(1)
+      end
+    end
+
+    context "player wins a set 7-6" do
+      it 'returns a set win by player if tie-break occurs' do
+        player.games_won = 6
+        player.opponent.games_won = 6
         4.times { player.record_won_ball! }
 
         expect(player.sets_won).to eq(1)
