@@ -20,18 +20,9 @@ describe Tennis::Game do
 
   describe '#wins_ball' do
     it 'increments the points of the winning player' do
-      game.wins_ball(game.player1)
+      game.wins_ball(1)
 
       expect(game.player1.points).to eq(1)
-    end
-  end
-
-  describe '#game_score' do
-    it 'returns deuce if both player scores are equal and each has more than 3' do
-      3.times { game.wins_ball(game.player1) }
-      3.times { game.wins_ball(game.player1) }
-
-      game.game_score.to eq("deuce")
     end
   end
 end
@@ -86,5 +77,15 @@ describe Tennis::Player do
         expect(player.score).to eq('forty')
       end
     end
+
+    context 'when players are tied and have more than 3 points' do
+      it 'returns deuce' do
+        player.points = 3
+        player.opponent = 3
+
+        expect(player.score).to eq("deuce")
+      end
+    end
   end
-end
+end # end of Tennis:Player testing.
+

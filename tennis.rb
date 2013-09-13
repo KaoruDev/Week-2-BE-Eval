@@ -13,8 +13,9 @@ module Tennis
     # Increase a player score. Parameter expected is a player class.
     #
     # Returns nothing.
-    def wins_ball(player)
-      player.record_won_ball!
+    def wins_ball(player_num)
+      @player1.record_won_ball! if player_num == 1
+      @player2.record_won_ball! if player_num == 2
     end
   end
 
@@ -37,7 +38,8 @@ module Tennis
       return 'love' if @points == 0
       return "fifteen" if @points == 1
       return "thirty" if @points == 2
-      return "forty" if @points == 3
+      return "forty" if @points == 3 && @points != @opponent.points
+
     end
   end
 end
