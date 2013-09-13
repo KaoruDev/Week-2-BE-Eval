@@ -32,6 +32,7 @@ describe Tennis::Player do
   let(:player) do
     player = Tennis::Player.new
     player.opponent = Tennis::Player.new
+    player.opponent.opponent = player
 
     return player
   end
@@ -110,6 +111,35 @@ describe Tennis::Player do
       it 'returns sets won' do
         player.points = 5
         player.score
+
+        expect(player.sets_won).to eq(1)
+      end
+    end
+
+    context 'resets game set if player wins' do
+      it 'returns sets won' do
+        player.opponent.opponent = player
+        3.times { player.record_won_ball!}
+        4.times { player.opponent.record_won_ball! }
+        5.times { player.record_won_ball!}
+
+        expect(player.games_won).to eq(1)
+      end
+
+      it 'returns player score for new set' do
+        3.times { player.record_won_ball!}
+        4.times { player.opponent.record_won_ball! }
+        5.times { player.record_won_ball!}
+
+        expect(player.score).to eq("thirty")
+      end
+    end
+
+    context 'player wins set when player wins 4 games and is ahead by 2 games' do
+      it 'returns set won by player' do
+        player.games_won = 4
+        player.opponent.games_won = 3
+        4.times { player.record_won_ball! }
 
         expect(player.sets_won).to eq(1)
       end

@@ -20,10 +20,11 @@ module Tennis
   end
 
   class Player
-    attr_accessor :points, :opponent, :sets_won
+    attr_accessor :points, :opponent, :games_won, :sets_won
 
     def initialize
       @points = 0
+      @games_won = 0
       @sets_won = 0
     end
 
@@ -32,6 +33,7 @@ module Tennis
     # Returns the integer new score.
     def record_won_ball!
       @points += 1
+      win?
     end
 
     # Returns the String score for the player.
@@ -84,11 +86,13 @@ module Tennis
     end
 
     # Returns true if player points > 3 and 2 more than opponent's points.
-    # Records a set win and resets player's and opponnent's score to 0
+    # Records a game win and resets player's and opponnent's score to 0
     #
     def win?
       if @points > @opponent.points + 1 && @points > 3
-        @sets_won += 1
+        @games_won += 1
+        @points = 0
+        @opponent.points = 0
         return true
       end
     end
