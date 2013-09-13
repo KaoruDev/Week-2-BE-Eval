@@ -95,6 +95,14 @@ describe Tennis::Player do
         expect(player.score).to eq("advantage")
       end
     end
+
+    context 'when player leads by 2 points and has more than 3 points' do
+      it 'returns win' do
+        player.points = 5
+
+        expect(player.score).to eq("win")
+      end
+    end
   end
 end # end of Tennis:Player testing.
 
