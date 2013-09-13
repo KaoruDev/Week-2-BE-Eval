@@ -102,15 +102,17 @@ module Tennis
       if @points > @opponent.points + 1 && @points > 3
         @points = 0
         opponent.points = 0
+        return true
       end
     end
 
     # Returns true if player has won a set
     #
     def won_set?
-      if @games_won > 4 && @games_won > @opponent.games_won + 1
-        @points = 0
-        @opponent.points = 0
+      if @opponent.games_won == 6 && @games_won == 7
+        @games_won = 0
+        @sets_won += 1
+      elsif @games_won > 4 && @games_won > @opponent.games_won + 1
         @games_won = 0
         @sets_won += 1
       end

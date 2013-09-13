@@ -153,6 +153,15 @@ describe Tennis::Player do
 
         expect(player.sets_won).to eq(1)
       end
+
+      it 'resets games and points to zero if the set is won' do
+        player.games_won = 6
+        player.opponent.games_won = 6
+        4.times { player.record_won_ball! }
+
+        expect(player.games_won).to eq(0)
+        expect(player.points).to eq(0)
+      end
     end
   end
 end # end of Tennis:Player testing.
