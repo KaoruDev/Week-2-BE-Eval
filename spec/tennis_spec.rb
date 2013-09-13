@@ -87,6 +87,14 @@ describe Tennis::Player do
       end
     end
 
+    context 'when player leads by one point and both player has more than 3 points' do
+      it 'returns advantage' do
+        player.points = 4
+        player.opponent.points = 3
+
+        expect(player.score).to eq("advantage")
+      end
+    end
   end
 end # end of Tennis:Player testing.
 
