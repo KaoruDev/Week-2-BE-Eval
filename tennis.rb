@@ -89,11 +89,9 @@ module Tennis
     # Records a game win and resets player's and opponnent's score to 0
     #
     def win?
-      if @points > @opponent.points + 1 && @points > 3
+      if won_game?
         @games_won += 1
-        @points = 0
-        @opponent.points = 0
-        won_game?
+        won_set?
         return true
       end
     end
@@ -101,16 +99,21 @@ module Tennis
     # Returns true if a player has won a game
     #
     def won_game?
-      if won_set?
-        @sets_won += 1
-        @games_won = 0
+      if @points > @opponent.points + 1 && @points > 3
+        @points = 0
+        opponent.points = 0
       end
     end
 
     # Returns true if player has won a set
     #
     def won_set?
-      @games_won > 4 && @games_won > @opponent.games_won + 1
+      if @games_won > 4 && @games_won > @opponent.games_won + 1
+        @points = 0
+        @opponent.points = 0
+        @games_won = 0
+        @sets_won += 1
+      end
     end
   end
 end
